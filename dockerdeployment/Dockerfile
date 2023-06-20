@@ -9,8 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["dockerdeployment.csproj", "dockerdeployment/"]
 RUN dotnet restore "dockerdeployment/dockerdeployment.csproj"
-COPY . .
+
 WORKDIR "/src/dockerdeployment"
+COPY . .
 RUN dotnet build "dockerdeployment.csproj" -c Release -o /app/build
 
 FROM build AS publish
